@@ -1,13 +1,26 @@
 #!/bin/bash
+# Script to calculate simple interest based on user input
 
-echo "Simple Interest Calculator"
+echo "---------------------------------------"
+echo "       SIMPLE INTEREST CALCULATOR       "
+echo "---------------------------------------"
 
-read -p "Enter principal amount: " principal
-read -p "Enter rate of interest (%): " rate
-read -p "Enter time period (years): " time
+# Prompt for inputs
+echo "Enter the Principal Amount (P):"
+read p
 
-interest=$(awk "BEGIN {printf "%.2f", ($principal * $rate * $time) / 100}")
-total=$(awk "BEGIN {printf "%.2f", $principal + $interest}")
+echo "Enter the Rate of Interest per year (%) (R):"
+read r
 
+echo "Enter the Time period in years (T):"
+read t
+
+# Calculate Simple Interest using bc for decimal/floating-point arithmetic
+interest=$(echo "scale=2; ($p * $r * $t) / 100" | bc)
+total=$(echo "scale=2; $p + $interest" | bc)
+
+# Output results
+echo "---------------------------------------"
 echo "Simple Interest: $interest"
-echo "Total Amount: $total"
+echo "Total Amount Payable: $total"
+echo "---------------------------------------"
